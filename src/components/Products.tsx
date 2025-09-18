@@ -11,7 +11,8 @@ const allProducts = [
     name: "Classic Aviator",
     price: 129.99,
     originalPrice: 189.99,
-    image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    image:
+      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     category: "sunglasses",
     badge: "Best Seller",
   },
@@ -20,7 +21,8 @@ const allProducts = [
     name: "Modern Square",
     price: 89.99,
     originalPrice: 139.99,
-    image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    image:
+      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     category: "prescription",
     badge: "New",
   },
@@ -29,7 +31,8 @@ const allProducts = [
     name: "Round Vintage",
     price: 99.99,
     originalPrice: 149.99,
-    image: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    image:
+      "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     category: "designer",
     badge: "Limited",
   },
@@ -38,7 +41,8 @@ const allProducts = [
     name: "Cat Eye Chic",
     price: 119.99,
     originalPrice: 169.99,
-    image: "https://images.unsplash.com/photo-1509695507497-903c140c43b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    image:
+      "https://images.unsplash.com/photo-1509695507497-903c140c43b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     category: "designer",
     badge: "Trending",
   },
@@ -47,7 +51,8 @@ const allProducts = [
     name: "Blue Light Shield",
     price: 79.99,
     originalPrice: 119.99,
-    image: "https://images.unsplash.com/photo-1577803645773-f96470509666?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    image:
+      "https://images.unsplash.com/photo-1577803645773-f96470509666?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     category: "computer",
     badge: "Sale",
   },
@@ -56,7 +61,8 @@ const allProducts = [
     name: "Sport Pro",
     price: 149.99,
     originalPrice: 199.99,
-    image: "https://images.unsplash.com/photo-1556306535-38febf6782e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    image:
+      "https://images.unsplash.com/photo-1556306535-38febf6782e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     category: "sunglasses",
   },
   {
@@ -64,7 +70,8 @@ const allProducts = [
     name: "Titanium Elite",
     price: 299.99,
     originalPrice: 399.99,
-    image: "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    image:
+      "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     category: "prescription",
     badge: "Premium",
   },
@@ -73,7 +80,8 @@ const allProducts = [
     name: "Retro Wave",
     price: 109.99,
     originalPrice: 159.99,
-    image: "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    image:
+      "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     category: "sunglasses",
   },
 ];
@@ -110,8 +118,10 @@ export function Products() {
     <section id="eyewear" className="py-20 bg-secondary/5">
       <div className="container mx-auto px-4">
         <div className="mb-12">
-          <h2 className="text-4xl font-bold text-center mb-8">Best-selling Glasses</h2>
-          
+          <h2 className="text-4xl font-bold text-center mb-8">
+            Best-selling Glasses
+          </h2>
+
           {/* Filters */}
           <div className="flex flex-wrap justify-center gap-2">
             {filters.map((filter) => (
@@ -132,23 +142,23 @@ export function Products() {
           {products.map((product) => (
             <Card
               key={product.id}
-              className="group overflow-hidden hover:shadow-xl transition-all duration-300"
+              className="group overflow-hidden hover:shadow-xl transition-all duration-300 rounded-3xl border-2"
             >
-              <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-secondary/50 to-background">
+              <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-secondary/50 to-background rounded-t-2xl">
                 <img
                   src={product.image}
                   alt={product.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 {product.badge && (
-                  <Badge className="absolute top-4 left-4 bg-[hsl(var(--gold))] text-primary">
+                  <Badge className="absolute top-4 left-4 bg-[hsl(var(--gold))] text-primary rounded-full px-3 py-1">
                     {product.badge}
                   </Badge>
                 )}
                 <Button
                   variant="ghost"
                   size="icon"
-                  className={`absolute top-4 right-4 bg-white/90 hover:bg-white ${
+                  className={`absolute top-4 right-4 bg-white/90 hover:bg-white rounded-full ${
                     favorites.includes(product.id) ? "text-red-500" : ""
                   }`}
                   onClick={() => toggleFavorite(product.id)}
@@ -160,10 +170,10 @@ export function Products() {
                   />
                 </Button>
               </div>
-              
-              <div className="p-4 space-y-3">
+
+              <div className="p-5 space-y-3">
                 <h3 className="font-semibold text-lg">{product.name}</h3>
-                
+
                 <div className="flex items-baseline gap-2">
                   <span className="text-2xl font-bold">${product.price}</span>
                   {product.originalPrice && (
@@ -172,10 +182,10 @@ export function Products() {
                     </span>
                   )}
                 </div>
-                
+
                 <Button
                   variant="hero"
-                  className="w-full"
+                  className="w-full rounded-full"
                   onClick={() => addItem(product)}
                 >
                   <ShoppingCart className="mr-2 h-4 w-4" />
