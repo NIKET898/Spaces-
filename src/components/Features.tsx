@@ -21,7 +21,7 @@ export function Features() {
                 </p>
               </div>
               <div className="flex items-baseline gap-2">
-                <span className="text-5xl font-bold text-[hsl(var(--gold))]">$9</span>
+                <span className="text-5xl font-bold text-[hsl(var(--gold))]">₹9</span>
                 <span className="text-primary-foreground/60">starting price</span>
               </div>
             </div>

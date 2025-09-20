@@ -43,7 +43,7 @@ export function Hero() {
               
               <div className="flex items-baseline gap-2">
                 <span className="text-sm text-muted-foreground">Starts From</span>
-                <span className="text-3xl font-bold text-[hsl(var(--gold))]">$9.99</span>
+                <span className="text-3xl font-bold text-[hsl(var(--gold))]">₹9.99</span>
               </div>
             </div>
           </div>

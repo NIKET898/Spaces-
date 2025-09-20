@@ -100,13 +100,22 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center">
-            <h2 className="text-2xl font-bold bg-gradient-to-r from-[hsl(var(--gold-dark))] to-[hsl(var(--gold))] bg-clip-text text-transparent">
-              Deepak Optical
-            </h2>
-          </div>
+        <div className="flex items-center justify-between py-1">
+          <div className="flex flex-col items-center">
+  <div className="flex items-center">
+    <img
+      src="/without_bg1.png"
+      alt="Deepak Optical Logo"
+      className="h-5 w-auto"
+    />
+  </div>
+  <div className="flex items-center mt-1">
+    <h2 className="text-2xm font-bold bg-gradient-to-r from-[hsl(var(--gold-dark))] to-[hsl(var(--gold))] bg-clip-text text-transparent">
+      Deepak Optical
+    </h2>
+  </div>
+</div>
+
 
           {/* Desktop Navigation */}
           <NavigationMenu className="hidden md:flex">

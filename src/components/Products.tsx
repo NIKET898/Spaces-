@@ -1,96 +1,19 @@
-import { useState, useEffect } from "react";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ShoppingCart, Heart } from "lucide-react";
-import { useCart } from "@/hooks/useCart";
-import { Badge } from "@/components/ui/badge";
 
-const allProducts = [
-  {
-    id: 1,
-    name: "Classic Aviator",
-    price: 129.99,
-    originalPrice: 189.99,
-    image:
-      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    category: "sunglasses",
-    badge: "Best Seller",
-  },
-  {
-    id: 2,
-    name: "Modern Square",
-    price: 89.99,
-    originalPrice: 139.99,
-    image:
-      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    category: "prescription",
-    badge: "New",
-  },
-  {
-    id: 3,
-    name: "Round Vintage",
-    price: 99.99,
-    originalPrice: 149.99,
-    image:
-      "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    category: "designer",
-    badge: "Limited",
-  },
-  {
-    id: 4,
-    name: "Cat Eye Chic",
-    price: 119.99,
-    originalPrice: 169.99,
-    image:
-      "https://images.unsplash.com/photo-1509695507497-903c140c43b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    category: "designer",
-    badge: "Trending",
-  },
-  {
-    id: 5,
-    name: "Blue Light Shield",
-    price: 79.99,
-    originalPrice: 119.99,
-    image:
-      "https://images.unsplash.com/photo-1577803645773-f96470509666?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    category: "computer",
-    badge: "Sale",
-  },
-  {
-    id: 6,
-    name: "Sport Pro",
-    price: 149.99,
-    originalPrice: 199.99,
-    image:
-      "https://images.unsplash.com/photo-1556306535-38febf6782e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    category: "sunglasses",
-  },
-  {
-    id: 7,
-    name: "Titanium Elite",
-    price: 299.99,
-    originalPrice: 399.99,
-    image:
-      "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    category: "prescription",
-    badge: "Premium",
-  },
-  {
-    id: 8,
-    name: "Retro Wave",
-    price: 109.99,
-    originalPrice: 159.99,
-    image:
-      "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    category: "sunglasses",
-  },
-];
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useCart } from "@/hooks/useCart";
+import { Badge, Heart, ShoppingCart } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+
+import { Product, allProducts } from "./Product_Data";
+import { Card } from "./ui/card";
 
 export function Products() {
   const [activeFilter, setActiveFilter] = useState("all");
-  const [products, setProducts] = useState(allProducts);
+  const [products, setProducts] = useState<Product[]>(allProducts);
   const { addItem } = useCart();
   const [favorites, setFavorites] = useState<number[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     if (activeFilter === "all") {
@@ -142,7 +65,8 @@ export function Products() {
           {products.map((product) => (
             <Card
               key={product.id}
-              className="group overflow-hidden hover:shadow-xl transition-all duration-300 rounded-3xl border-2"
+              className="group overflow-hidden hover:shadow-xl transition-all duration-300 rounded-3xl border-2 cursor-pointer"
+              onClick={() => setSelectedProduct(product)}
             >
               <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-secondary/50 to-background rounded-t-2xl">
                 <img
@@ -150,18 +74,21 @@ export function Products() {
                   alt={product.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                {product.badge && (
+                {/* {product.badge && (
                   <Badge className="absolute top-4 left-4 bg-[hsl(var(--gold))] text-primary rounded-full px-3 py-1">
                     {product.badge}
                   </Badge>
-                )}
+                )} */}
                 <Button
                   variant="ghost"
                   size="icon"
-                  className={`absolute top-4 right-4 bg-white/90 hover:bg-white rounded-full ${
+                  className={`absolute top-4 right-4 bg-white/90 hover:bg-white rounded-full z-10 ${
                     favorites.includes(product.id) ? "text-red-500" : ""
                   }`}
-                  onClick={() => toggleFavorite(product.id)}
+                  onClick={(e) => {
+                    e.stopPropagation(); // prevent modal open
+                    toggleFavorite(product.id);
+                  }}
                 >
                   <Heart
                     className={`h-5 w-5 ${
@@ -175,27 +102,65 @@ export function Products() {
                 <h3 className="font-semibold text-lg">{product.name}</h3>
 
                 <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-bold">${product.price}</span>
+                  <span className="text-2xl font-bold">₹{product.price}</span>
                   {product.originalPrice && (
                     <span className="text-sm text-muted-foreground line-through">
-                      ${product.originalPrice}
+                      ₹{product.originalPrice}
                     </span>
                   )}
                 </div>
-
-                <Button
-                  variant="hero"
-                  className="w-full rounded-full"
-                  onClick={() => addItem(product)}
-                >
-                  <ShoppingCart className="mr-2 h-4 w-4" />
-                  Add to Cart
-                </Button>
               </div>
             </Card>
           ))}
         </div>
       </div>
+
+      {/* Popup Modal */}
+      <Dialog open={!!selectedProduct} onOpenChange={() => setSelectedProduct(null)}>
+        <DialogContent className="max-w-lg rounded-2xl">
+          {selectedProduct && (
+            <>
+              <DialogHeader>
+                <DialogTitle>{selectedProduct.name}</DialogTitle>
+              </DialogHeader>
+
+              <img
+                src={selectedProduct.image}
+                alt={selectedProduct.name}
+                className="w-full rounded-xl mb-4"
+              />
+
+              <div className="space-y-3">
+                <p className="text-lg font-semibold">
+                  Price: ₹{selectedProduct.price}
+                </p>
+                {selectedProduct.originalPrice && (
+                  <p className="text-sm line-through text-muted-foreground">
+                    MRP: ₹{selectedProduct.originalPrice}
+                  </p>
+                )}
+                <p className="text-sm text-muted-foreground">
+                  Category: {selectedProduct.category}
+                </p>
+                {selectedProduct.badge && (
+                  <Badge className="bg-[hsl(var(--gold))] text-primary rounded-full px-3 py-1">
+                    {selectedProduct.badge}
+                  </Badge>
+                )}
+              </div>
+
+              <Button
+                variant="hero"
+                className="w-full mt-4 rounded-full"
+                onClick={() => addItem(selectedProduct)}
+              >
+                <ShoppingCart className="mr-2 h-4 w-4" />
+                Add to Cart
+              </Button>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
