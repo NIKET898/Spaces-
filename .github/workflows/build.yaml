@@ -6,7 +6,7 @@ on:
       - dev   
 
 permissions:
-  contents: write   
+  contents: write
 
 jobs:
   build:
@@ -33,3 +33,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          enable_jekyll: false   # ✅ prevents GitHub from interfering with /assets
