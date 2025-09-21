@@ -9,7 +9,12 @@ export default defineConfig(({ mode }) => ({
   base: mode === "production" ? "/Spaces-/" : "/", 
   server: {
     host: "::",
-    port: 8080,
+     port: 3000,
+    open: true
+  },
+   build: {
+    outDir: 'dist',
+    sourcemap: true
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {

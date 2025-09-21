@@ -3,10 +3,10 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main   # change if your default branch is not main
+      - dev   
 
 permissions:
-  contents: write   # needed for gh-pages branch
+  contents: write   
 
 jobs:
   build:
