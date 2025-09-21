@@ -23,7 +23,10 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm install   # ✅ changed from npm ci → avoids lockfile mismatch
+        run: npm install 
+
+      - name: Checkout code
+        uses: npm ci  
 
       - name: Build project
         run: npm run build
@@ -33,4 +36,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          enable_jekyll: false   # ✅ prevents GitHub from interfering with /assets
+         
